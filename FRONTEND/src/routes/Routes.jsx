@@ -1,19 +1,17 @@
-export default function Routes() {
-    return (
-        <>
-            <div id="sidebar">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href={`/hoem`} >Home</a>
-                        </li>
-                        <li>
-                            <a href={`/contacts/2`}>Escalas</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div id="detail"></div>
-        </>
-    );
-}
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import Home from "../pages/Home/Home";
+import Escala from "../pages/Escala/Escala";
+
+const Routering = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+    },
+    {
+        path: "/escala",
+        element: <Escala />,
+    },
+]);
+
+export default Routering;
