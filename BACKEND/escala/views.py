@@ -20,18 +20,10 @@ class EscalaApiView(APIView):
     @api_view(['POST'])
     def cadastrar_escala(request):
         dados = request.data
-<<<<<<< HEAD
-        print("aqui")
-        print(dados)
         Escala.objects.create( codigo = dados["codigo"],
                                 nome = dados["nome"],
                                 data_comeco = dados["data_comeco"],
                                 data_final= dados["data_final"]
-=======
-        Escala.objects.create(nome = dados["nome"],
-                                data_comeco =  datetime.now().date(),
-                                data_final= datetime.now().date() + timedelta(days=90)
->>>>>>> main
                                 )
         return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
     
@@ -70,7 +62,6 @@ class EscalaApiView(APIView):
 #     serializer_class = EscalaSerializer
 #     queryset = Escala.objects.all()
 
-<<<<<<< HEAD
     # def retrieve(self, request, pk=None):
     #     queryset = Escala.objects.all()
     #     user = get_object_or_404(queryset, pk=pk)
@@ -90,19 +81,3 @@ class EscalaApiView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-=======
-#     # def list(self, request, *args, **kwargs):
-#     #     # queryset = Escala.objects.filter(nome="teste")
-#     #     serializer = self.get_serializer(queryset, many=True)
-#     #     return Response(serializer.data)
-
-#     def create(self, request, *args, **kwargs):
-#         data = request.data
-#         data['data_comeco'] = datetime.now().date()
-#         data['data_final'] = datetime.now().date() + timedelta(days=90) # colocar para 3 meses depois
-#         serializer = EscalaSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
->>>>>>> main
