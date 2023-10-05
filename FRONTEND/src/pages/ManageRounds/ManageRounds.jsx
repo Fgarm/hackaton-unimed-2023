@@ -91,12 +91,29 @@ export default function ManageRoundsPage() {
     //     });
     // }
 
+    const [mes, setMes] = useState("Janeiro");
+
+    const numeroMes = {
+        1: "Janeiro",
+        2: "Fevereiro",
+        3: "Março",
+        4: "Abril",
+        5: "Maio",
+        6: "Junho",
+        7: "Julho",
+        8: "Agosto",
+        9: "Setembro",
+        10: "Outubro",
+        11: "Novembro",
+        12: "Dezembro",
+    };
+
     useEffect(() => {
         if (run) {
             getPlantaos();
         }
         setRun(false);
-    });
+    }, mes);
 
     const [parsedPlantoes, setParsedPlantoes] = useState({});
     const [run, setRun] = useState(true);
@@ -106,6 +123,8 @@ export default function ManageRoundsPage() {
         for (var dateKey in parsedPlantoes) {
             if (value.date().toString() == dateKey.toString()) {
                 listData = parsedPlantoes[dateKey.toString()];
+                //console.log(parsedPlantoes[dateKey.toString()]);
+                setMes(parsedPlantoes[dateKey.toString()].month);
                 return listData;
             }
         }
@@ -113,45 +132,32 @@ export default function ManageRoundsPage() {
         return listData || [];
     };
 
-    function getPlantaos() {
-        var listPlantaos = [
-            {
-                data: "2023-04-29",
-                inicio: 780,
-                final: 1900,
-                valido: true,
-                funcionario: 1,
-                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
-            },
-            {
-                data: "2023-04-29",
-                inicio: 780,
-                final: 1900,
-                valido: true,
-                funcionario: 1,
-                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
-            },
-            {
-                data: "2023-04-30",
-                inicio: 780,
-                final: 1900,
-                valido: true,
-                funcionario: 2,
-                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
-            },
-            {
-                data: "2023-04-31",
-                inicio: 780,
-                final: 1900,
-                valido: true,
-                funcionario: 2,
-                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
-            },
-        ];
+    async function getPlantaos() {
+        // const plantaos = {
+        //     //escala: params.get("id"),
+        //     escala: "123"
+        // };
+
+        // const response = await fetch("http://localhost:8000/horario/obter-horarios-escala/", {
+        //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         // 'Content-Type': 'application/x-www-form-urlencoded',
+        //     },
+        //     body: JSON.stringify(plantaos), // body data type must match "Content-Type" header
+        // });
+
+        // var listPlantaos;
+
+        // response.then((value) => {
+        //     listPlantaos = value;
+        //   });
+
+        var listPlantaos = [{ "data": "2023-04-29", "inicio": 46800, "final": 68400, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-29", "inicio": 25200, "final": 46800, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-30", "inicio": 46800, "final": 68400, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-31", "inicio": 46800, "final": 68400, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }];
+        //console.log(response.json());
 
         const transformedPlantaos = {
-            // tendeu
-        };
+        }
 
         // for (var key in transformedPlantaos) {
         //     console.log(key);
@@ -177,22 +183,33 @@ export default function ManageRoundsPage() {
 
             const final_plantao = `${hours_final}:${minutes_final}`;
 
-            if (
-                transformedPlantaos.hasOwnProperty(
-                    (date.getDate() + 1).toString()
-                )
-            ) {
-                transformedPlantaos[(date.getDate() + 1).toString()].push({
-                    type: `${init_plantao} - ${final_plantao}`,
-                    content: `ID medico: ${plantao.funcionario}`,
-                });
+            const month = date.getMonth() + 1;
+
+            //setMes(numeroMes[month]);
+
+            if (transformedPlantaos.hasOwnProperty((date.getDate() + 1).toString())) {
+                transformedPlantaos[(date.getDate() + 1).toString()].push({ type: `${init_plantao} - ${final_plantao}`, content: `Dr. ${plantao.funcionario}`, month: `${numeroMes[month]}` });
+
             } else {
                 transformedPlantaos[(date.getDate() + 1).toString()] = [];
-                transformedPlantaos[(date.getDate() + 1).toString()].push({
-                    type: `${init_plantao} - ${final_plantao}`,
-                    content: `ID medico: ${plantao.funcionario}`,
-                });
+                transformedPlantaos[(date.getDate() + 1).toString()].push({ type: `${init_plantao} - ${final_plantao}`, content: `Dr.: ${plantao.funcionario}`, month: `${numeroMes[month]}` });
             }
+
+            // if (transformedPlantaos.hasOwnProperty((date.getMonth + 1).toString())) {
+            //     if (transformedPlantaos[(date.getMonth + 1).toString()].hasOwnProperty((date.getDate() + 1).toString())) {
+            //         transformedPlantaos[(date.getMonth() + 1).toString()][(date.getDate() + 1).toString()].push({ type: `${init_plantao} - ${final_plantao}`, content: `ID medico: ${plantao.funcionario}` });
+            //     } else {
+            //         var keyDay = (date.getDate() + 1).toString();
+            //         transformedPlantaos[(date.getMonth() + 1).toString()][keyDay] = [{ type: `${init_plantao} - ${final_plantao}`, content: `ID medico: ${plantao.funcionario}` }];
+            //         //transformedPlantaos[(date.getMonth() + 1).toString()].push({ keyDay: [{ type: `${init_plantao} - ${final_plantao}`, content: `ID medico: ${plantao.funcionario}` }] });
+            //     }
+            // } else {
+            //     transformedPlantaos[(date.getMonth() + 1).toString()] = [];
+            //     var keyDay = (date.getDate() + 1).toString();
+            //     //transformedPlantaos[(date.getMonth() + 1).toString()].push({ keyDay: [{ type: `${init_plantao} - ${final_plantao}`, content: `ID medico: ${plantao.funcionario}` }] });
+            //     transformedPlantaos[(date.getMonth() + 1).toString()][keyDay] = [{ type: `${init_plantao} - ${final_plantao}`, content: `ID medico: ${plantao.funcionario}` }];
+            // }
+
             //}
         }
         console.log(transformedPlantaos);
@@ -201,10 +218,7 @@ export default function ManageRoundsPage() {
         //)
     }
 
-    const [mes, setMes] = useState("Outubro");
-
     const onPanelChange = (value) => {
-        console.log(numeroMes[value.$M] + 1);
         setMes(numeroMes[value.$M + 1]);
     };
 

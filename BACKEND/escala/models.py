@@ -7,7 +7,7 @@ from funcionario.models import Funcionario
 # Create your models here.
 
 class Escala(models.Model):
-    codigo = models.CharField(primary_key=True, max_length=36, default=uuid4, editable=False)
+    codigo = models.CharField(primary_key=True, max_length=36, editable=False)
     nome = models.CharField(max_length=255)
     data_comeco = models.DateField()
     data_final = models.DateField()
