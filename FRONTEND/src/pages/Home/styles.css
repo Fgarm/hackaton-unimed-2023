@@ -34,6 +34,11 @@
 }
 .horarios {
     color: #0d0d0d;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.178);
 }
 
@@ -58,7 +63,7 @@
 }
 
 .hora button {
-    background-color: #ff4a4a;
+    background-color: #4a5cff;
     padding: 10px;
     border: none;
     color: white;
