@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import "./styles.css";
 import { Badge, Calendar } from "antd";
+import { useNavigate } from "react-router-dom";
+import ModalAguardandoRodada from "../../components/ModalAguardandoRodada/ModalAguardandoRodada";
 import ModalEscolherHorario from "../../components/ModalEscolherHorario/ModalEscolherHorario";
-import { Navigate, useNavigate } from "react-router-dom";
+import "./styles.css";
 
 const getMonthData = (value) => {
     if (value.month() === 8) {
@@ -14,6 +15,7 @@ const getMonthData = (value) => {
 export default function Escala() {
     const [modal, setModal] = useState(false);
     const [diaSelecionado, setDiaSelecionado] = useState([]);
+    const [modalEspera, setModalEspera] = useState(false);
     const navigate = useNavigate();
 
     function getHorarios(dia) {
@@ -24,7 +26,7 @@ export default function Escala() {
                 list = [
                     {
                         type: "Horario",
-                        content: "Plantão as 07:00",
+                        content: "Dr. Carlos 07:00 - 13:00  ",
                     },
                 ];
                 break;
@@ -74,10 +76,19 @@ export default function Escala() {
         setDiaSelecionado(newarray);
         console.log(diaSelecionado);
     }
+    function openModal() {
+        console.log(modalEspera)
+        setModalEspera(true);
+    }
+
+    function closeModal() {
+        setModalEspera(false);
+        navigate('/')
+    }
 
     function verificaNumeroDeEscolhas() {
         if (diaSelecionado.length > 2) {
-            navigate("/");
+            openModal();
         }
     }
 
@@ -85,8 +96,9 @@ export default function Escala() {
         <div className="escala">
             {modal && <ModalEscolherHorario fecharModal={fecharModal} />}
             <h1>Escolhar Seus Horários</h1>
+            {modalEspera && <ModalAguardandoRodada closeModal={closeModal} />}
             <div>
-                {!modal && (
+                {!modalEspera && !modal && (
                     <Calendar cellRender={cellrender} onSelect={onSelect} />
                 )}
             </div>
