@@ -1,70 +1,76 @@
-import { React, useState, useEffect } from 'react';
-import './styles.css';
-import { Calendar, Badge, Layout, Space, Button, Divider, List, Typography, Avatar, Col, Row } from 'antd';
+import { React, useState, useEffect } from "react";
+import "./styles.css";
+import {
+    Calendar,
+    Badge,
+    Layout,
+    Space,
+    Button,
+    Divider,
+    List,
+    Typography,
+    Avatar,
+    Col,
+    Row,
+} from "antd";
 import Home from "../../pages/Home/Home";
-import { UserOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import { UserOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const schedule = {
-    "firstMonth": {
+    firstMonth: {
         "2023-08-05": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-            { hours: '13:00 - 19:00', content: 'Dr. Nome' },
-            { hours: '19:00 - 7:00', content: 'Dr. Nome' },
+            { hours: "7:00 - 13:00", content: "Dr. Nome" },
+            { hours: "13:00 - 19:00", content: "Dr. Nome" },
+            { hours: "19:00 - 7:00", content: "Dr. Nome" },
         ],
-        "2023-08-06": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-        ]
+        "2023-08-06": [{ hours: "7:00 - 13:00", content: "Dr. Nome" }],
     },
-    "secondMonth": {
+    secondMonth: {
         "2023-09-05": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-            { hours: '13:00 - 19:00', content: 'Dr. Nome' },
-            { hours: '19:00 - 7:00', content: 'Dr. Nome' },
+            { hours: "7:00 - 13:00", content: "Dr. Nome" },
+            { hours: "13:00 - 19:00", content: "Dr. Nome" },
+            { hours: "19:00 - 7:00", content: "Dr. Nome" },
         ],
-        "2023-09-06": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-        ]
+        "2023-09-06": [{ hours: "7:00 - 13:00", content: "Dr. Nome" }],
     },
-    "thridMonth": {
+    thridMonth: {
         "2023-10-05": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-            { hours: '13:00 - 19:00', content: 'Dr. Nome' },
-            { hours: '19:00 - 7:00', content: 'Dr. Nome' },
+            { hours: "7:00 - 13:00", content: "Dr. Nome" },
+            { hours: "13:00 - 19:00", content: "Dr. Nome" },
+            { hours: "19:00 - 7:00", content: "Dr. Nome" },
         ],
-        "2023-10-06": [
-            { hours: '7:00 - 13:00', content: 'Dr. Nome' },
-        ]
-    }
-}
+        "2023-10-06": [{ hours: "7:00 - 13:00", content: "Dr. Nome" }],
+    },
+};
 
 const scaleStyle = {
-    position: 'relative',
+    position: "relative",
 };
 
 const navigateButtonsScaleStyle = {
-    paddingTop: '20px',
-    position: 'relative',
+    paddingTop: "20px",
+    position: "relative",
 };
 
 const doctorsListStyle = {
-    paddingTop: '10px',
+    paddingTop: "10px",
 };
 
 const data = [
     {
-        title: 'Dr. Nome',
+        title: "Dr. Nome",
     },
     {
-        title: 'Dr. Nome',
+        title: "Dr. Nome",
     },
     {
-        title: 'Dr. Nome',
+        title: "Dr. Nome",
     },
     {
-        title: 'Dr. Nome',
+        title: "Dr. Nome",
     },
 ];
 
@@ -111,7 +117,6 @@ export default function ManageRoundsPage() {
 
     const [parsedPlantoes, setParsedPlantoes] = useState({});
     const [run, setRun] = useState(true);
-
     const getListData = (value) => {
         let listData;
 
@@ -123,21 +128,6 @@ export default function ManageRoundsPage() {
                 return listData;
             }
         }
-        // switch (value.date()) {
-        //     case 8:
-        //         listData = [
-        //             {
-        //                 type: "warning",
-        //                 content: "This is warning event.",
-        //             },
-        //             {
-        //                 type: "success",
-        //                 content: "This is usual event.",
-        //             },
-        //         ];
-        //         break;
-        //     default:
-        // }
 
         return listData || [];
     };
@@ -183,13 +173,13 @@ export default function ManageRoundsPage() {
 
             const date = new Date(plantao.data);
 
-            const hours_init = Math.floor(plantao.inicio / 3600)
-            const minutes_init = Math.floor((plantao.inicio % 3600) / 60)
+            const hours_init = Math.floor(plantao.inicio / 3600);
+            const minutes_init = Math.floor((plantao.inicio % 3600) / 60);
 
             const init_plantao = `${hours_init}:${minutes_init}`;
 
-            const hours_final = Math.floor(plantao.final / 3600)
-            const minutes_final = Math.floor((plantao.final % 3600) / 60)
+            const hours_final = Math.floor(plantao.final / 3600);
+            const minutes_final = Math.floor((plantao.final % 3600) / 60);
 
             const final_plantao = `${hours_final}:${minutes_final}`;
 
@@ -226,7 +216,7 @@ export default function ManageRoundsPage() {
         setParsedPlantoes(transformedPlantaos);
         // })
         //)
-    };
+    }
 
     const onPanelChange = (value) => {
         setMes(numeroMes[value.$M + 1]);
@@ -252,7 +242,10 @@ export default function ManageRoundsPage() {
             <ul className="events">
                 {listData.map((item) => (
                     <li key={item.content}>
-                        <Badge status={item.type} text={item.type + " - " + item.content} />
+                        <Badge
+                            status={item.type}
+                            text={item.type + " - " + item.content}
+                        />
                     </li>
                 ))}
             </ul>
@@ -291,14 +284,18 @@ export default function ManageRoundsPage() {
             <Space
                 direction="vertical"
                 style={{
-                    width: '100%',
+                    width: "100%",
                 }}
-                align='center'
+                align="center"
                 size={[0, 48]}
             >
                 <h1>Escala Plantão</h1>
-                <Calendar style={scaleStyle} onPanelChange={onPanelChange} onSelect={onSelect}
-                    cellRender={cellRender} />
+                <Calendar
+                    style={scaleStyle}
+                    onPanelChange={onPanelChange}
+                    onSelect={onSelect}
+                    cellRender={cellRender}
+                />
                 <Space wrap style={navigateButtonsScaleStyle}>
                     <Button>Mês anterior</Button>
                     <Button>Próxima rodada</Button>
@@ -319,12 +316,20 @@ export default function ManageRoundsPage() {
                         header={<h3>Médicos</h3>}
                         itemLayout="horizontal"
                         dataSource={data}
-                        style={{ width: '700px' }}
+                        style={{ width: "700px" }}
                         renderItem={(item, index) => (
                             <List.Item>
                                 <List.Item.Meta
-                                    avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />}
-                                    title={<a href="https://ant.design">{item.title}</a>}
+                                    avatar={
+                                        <Avatar
+                                            src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
+                                        />
+                                    }
+                                    title={
+                                        <a href="https://ant.design">
+                                            {item.title}
+                                        </a>
+                                    }
                                     description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                                 />
                             </List.Item>
@@ -335,7 +340,6 @@ export default function ManageRoundsPage() {
             </Space>
             {/* </Col>
             </Row> */}
-
-
-        </>);
+        </>
+    );
 }

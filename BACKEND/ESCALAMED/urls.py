@@ -14,6 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.contrib import admin
+# from django.urls import path, include
+# from django.conf import settings
+# from django.conf.urls.static import static
+# from escala.urls import urlpatterns as escala_urls
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('ESCALAMED.funcionario/', include('funcionario.urls')),
+#     path('ESCALAMED.escala/', include('escala.urls')),
+# ]
+# urlpatterns += escala_urls
+
 from django.contrib import admin
 from django.urls import path, include
 

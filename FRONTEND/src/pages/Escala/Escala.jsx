@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "./styles.css";
 import { Badge, Button, Calendar, Radio, Modal } from "antd";
-//import ModalEscolherHorario from "../../components/ModalEscolherHorario/ModalEscolherHorario";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Badge, Calendar } from "antd";
+import { useNavigate } from "react-router-dom";
+import ModalAguardandoRodada from "../../components/ModalAguardandoRodada/ModalAguardandoRodada";
+import "./styles.css";
 
 const getMonthData = (value) => {
     if (value.month() === 8) {
@@ -20,6 +23,7 @@ const horaInString = {
 
 export default function Escala() {
     const [diaSelecionado, setDiaSelecionado] = useState([]);
+    const [modalEspera, setModalEspera] = useState(false);
     const navigate = useNavigate();
 
     const location = useLocation()
@@ -152,6 +156,7 @@ export default function Escala() {
             </Modal>
 
             <h1>Escolhar Seus Horários</h1>
+            {modalEspera && <ModalAguardandoRodada closeModal={closeModal} />}
             <div>
                 <Calendar cellRender={cellrender} onSelect={showModal} />
                 <button className="gerar-token" onClick={postPlantao}>

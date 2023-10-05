@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+
 class FuncionarioApiView(APIView):
 
     @api_view(['POST'])
@@ -16,13 +17,14 @@ class FuncionarioApiView(APIView):
                                 )
         return Response("FUNCIONARIO CADASTRADO", status=status.HTTP_201_CREATED)
     
-    @api_view(['POST'])
+    @api_view(['GET'])
     def pegar_funcionario(request):
         dados = request.data
         funct = Funcionario.objects.get(id = dados["id"],
                                 )
         
         return Response(FuncionarioSerializer(funct, context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
+    
 
 
 #class FuncionarioView(ModelViewSet):

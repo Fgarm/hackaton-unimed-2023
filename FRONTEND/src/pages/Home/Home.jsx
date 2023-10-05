@@ -13,24 +13,24 @@ const getListData = (value) => {
         case 8:
             listData = [
                 {
-                    type: "warning",
-                    content: "This is warning event.",
+                    type: "Horario",
+                    content: "Horário: 07:00 - 13:00  ",
                 },
             ];
             break;
         case 10:
             listData = [
                 {
-                    type: "warning",
-                    content: "This is warning event.",
+                    type: "Horario",
+                    content: "Horário: 19:00 - 07:00  ",
                 },
             ];
             break;
         case 15:
             listData = [
                 {
-                    type: "error",
-                    content: "This is error event 4.",
+                    type: "Horario",
+                    content: "Horário: 13:00 - 19:00  ",
                 },
             ];
             break;
@@ -63,6 +63,97 @@ export default function Home() {
         11: "Novembro",
         12: "Dezembro",
     };
+    function getPlantaos() {
+        // await Promise.all(
+        //     axios.get().then((res) => {
+        //console.log(res.data);
+        var listPlantaos = [
+            {
+                data: "2023-04-29",
+                inicio: 780,
+                final: 1900,
+                valido: true,
+                funcionario: 1,
+                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
+            },
+            {
+                data: "2023-04-29",
+                inicio: 780,
+                final: 1900,
+                valido: true,
+                funcionario: 1,
+                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
+            },
+            {
+                data: "2023-04-30",
+                inicio: 780,
+                final: 1900,
+                valido: true,
+                funcionario: 2,
+                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
+            },
+            {
+                data: "2023-04-31",
+                inicio: 780,
+                final: 1900,
+                valido: true,
+                funcionario: 2,
+                escala: "51d22dad-4717-4edd-8ebe-2818b68cb541",
+            },
+        ];
+
+        const transformedPlantaos = {
+            // tendeu
+        };
+
+        // for (var key in transformedPlantaos) {
+        //     console.log(key);
+        // }
+
+        for (let index = 0; index < listPlantaos.length; index++) {
+            const plantao = listPlantaos[index];
+            // data: "2023-01-01",
+            // inicio: 0
+            // final: 190000
+            // funcionario: 1
+            // escala: "id_escala_UUID"
+
+            const date = new Date(plantao.data);
+
+            const hours_init = Math.floor(plantao.inicio / 3600);
+            const minutes_init = Math.floor((plantao.inicio % 3600) / 60);
+
+            const init_plantao = `${hours_init}:${minutes_init}`;
+
+            const hours_final = Math.floor(plantao.final / 3600);
+            const minutes_final = Math.floor((plantao.final % 3600) / 60);
+
+            const final_plantao = `${hours_final}:${minutes_final}`;
+
+            if (
+                transformedPlantaos.hasOwnProperty(
+                    (date.getDate() + 1).toString()
+                )
+            ) {
+                transformedPlantaos[(date.getDate() + 1).toString()].push({
+                    type: `${init_plantao} - ${final_plantao}`,
+                    content: `ID medico: ${plantao.funcionario}`,
+                });
+            } else {
+                transformedPlantaos[(date.getDate() + 1).toString()] = [];
+                transformedPlantaos[(date.getDate() + 1).toString()].push({
+                    type: `${init_plantao} - ${final_plantao}`,
+                    content: `ID medico: ${plantao.funcionario}`,
+                });
+            }
+            //}
+        }
+        console.log(transformedPlantaos);
+        setParsedPlantoes(transformedPlantaos);
+        // })
+        //)
+    }
+
     const onPanelChange = (value) => {
         setMes(numeroMes[value.$M + 1]);
     };
@@ -103,13 +194,13 @@ export default function Home() {
     }
     function closeModalToken() {
         setModalGerarToken(false);
-        navigate('/escala')
+        navigate("/escala");
     }
 
     useEffect(() => {}, []);
 
     function abrirModalGeralToken() {
-        setModalGerarToken(true)
+        setModalGerarToken(true);
     }
     return (
         <div className="home">
@@ -130,7 +221,7 @@ export default function Home() {
                 )}
 
                 <div className="horarios">
-                    <h2>8 de Setembro</h2>
+                    <h2>8 de Outubro</h2>
                     <div className="horarios-dia">
                         <div className="hora">
                             <p>07:00 as 13:00</p>
@@ -149,7 +240,6 @@ export default function Home() {
                                 Avisar Ausencia
                             </button>
                         </div>
-                       
                     </div>
                 </div>
             </div>
