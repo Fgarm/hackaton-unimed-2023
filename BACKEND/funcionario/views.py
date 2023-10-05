@@ -1,4 +1,5 @@
 from .models import Funcionario
+from .serializers import FuncionarioSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -14,6 +15,14 @@ class FuncionarioApiView(APIView):
                                 funcao= dados["funcao"],
                                 )
         return Response("FUNCIONARIO CADASTRADO", status=status.HTTP_201_CREATED)
+    
+    @api_view(['POST'])
+    def pegar_funcionario(request):
+        dados = request.data
+        funct = Funcionario.objects.get(id = dados["id"],
+                                )
+        
+        return Response(FuncionarioSerializer(funct, context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
 
 
 #class FuncionarioView(ModelViewSet):

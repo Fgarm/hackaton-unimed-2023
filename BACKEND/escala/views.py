@@ -30,15 +30,23 @@ class EscalaApiView(APIView):
     def cadastrar_medicos(request):
         dados = request.data
         escala = Escala.objects.get(codigo=dados["codigo"])
-        for funcionario in dados['funcionarios']:
-            funct = Funcionario.objects.get(id=dados["funcionario"])
-            FUNCIONARIOS_ESCALA.objects.create(funcionario=funct, escala=escala)
+        funct = Funcionario.objects.get(id=dados["funcionario"])
+        FUNCIONARIOS_ESCALA.objects.create(funcionario=funct, escala=escala)
         return (Response("SUCESSO", status=status.HTTP_200_OK))
     
     @api_view(['POST'])
     def get_medicos_escala(request):
         escala = Escala.objects.get(codigo=request.data["codigo"])
         functs = FUNCIONARIOS_ESCALA.objects.filter(escala=escala)
+        
+    # devolve o médico da vez, com status diferente pra entre round e acabou a escolha
+    
+    # requisição passa o turno
+    
+    # requisição supervisor acaba a escolha / prox turno
+    
+    
+    
 
 
 
