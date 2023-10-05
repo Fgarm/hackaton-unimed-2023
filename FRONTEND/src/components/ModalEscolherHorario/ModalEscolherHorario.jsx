@@ -3,8 +3,8 @@ import React from "react";
 import "./style.css";
 export default function ModalEscolherHorario({ fecharModal }) {
     return (
-        <div className="modal-avisar">
-            <div className="modal-avisar-container">
+        <div className="modal-escolher">
+            <div className="modal-escolher-container">
                 <h2>Defina o Horário</h2>
                 <div className="modal-botoes">
                     <div className="input-label">

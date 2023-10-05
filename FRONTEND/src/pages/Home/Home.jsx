@@ -144,17 +144,12 @@ export default function Home() {
                             </button>
                         </div>
                         <div className="hora">
-                            <p>07:00 as 13:00</p>
+                            <p>13:00 as 19:00</p>
                             <button onClick={() => setModal(true)}>
                                 Avisar Ausencia
                             </button>
                         </div>
-                        <div className="hora">
-                            <p>07:00 as 13:00</p>
-                            <button onClick={() => setModal(true)}>
-                                Avisar Ausencia
-                            </button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

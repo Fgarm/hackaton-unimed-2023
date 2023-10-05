@@ -1,4 +1,4 @@
-.modal-avisar {
+.modal-escolher {
     z-index: 2;
     left: 0;
     top: 0;
@@ -16,7 +16,7 @@
     -webkit-backdrop-filter: blur(8.5px);
 }
 
-.modal-avisar-container {
+.modal-escolher -container {
     width: 30vw;
     height: 40vh;
     border-radius: 10px;
@@ -41,7 +41,7 @@
     border-radius: 3px;
     color: white;
     height: 50px;
-    background-color: #4a5cff;
+    background-color: #03A6A6;
     font-size: 22px;
 }
 
