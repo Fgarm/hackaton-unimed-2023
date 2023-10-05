@@ -16,6 +16,10 @@ const getListData = (value) => {
                     type: "Horario",
                     content: "Horário: 07:00 - 13:00  ",
                 },
+                {
+                    type: "Horario",
+                    content: "Horário: 13:00 - 19:00  ",
+                },
             ];
             break;
         case 10:

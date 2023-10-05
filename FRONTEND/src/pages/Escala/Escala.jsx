@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./styles.css";
 import { Badge, Button, Calendar, Radio, Modal } from "antd";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
-import { Badge, Calendar } from "antd";
-import { useNavigate } from "react-router-dom";
 import ModalAguardandoRodada from "../../components/ModalAguardandoRodada/ModalAguardandoRodada";
 import "./styles.css";
+import Sidebar from "../../components/SideBar";
 
 const getMonthData = (value) => {
     if (value.month() === 8) {
@@ -52,12 +51,12 @@ export default function Escala() {
     const monthCellRender = (value) => {
         const num = getMonthData(value);
         return num ? (
-          <div className="notes-month">
-            <section>{num}</section>
-            <span>Backlog number</span>
-          </div>
+            <div className="notes-month">
+                <section>{num}</section>
+                <span>Backlog number</span>
+            </div>
         ) : null;
-      };
+    };
 
     const dateCellRender = (value) => {
         const listData = getHorarios(value.$D);
@@ -127,7 +126,9 @@ export default function Escala() {
             body: JSON.stringify(plantao), // body data type must match "Content-Type" header
         });
 
-        console.log(response);
+        if (diasSelecionados.length >= 3) {
+            navigate("/");
+        }
     }
 
     const [placement, SetPlacement] = useState('07:00 - 13:00');
@@ -146,18 +147,19 @@ export default function Escala() {
     }, [horario]);
 
     return (
-        <div className="escala">
-            <Modal title="Defina o Horário" open={isModalOpen} onOk={handleOk}>
-                <Radio.Group value={placement} onChange={placementChange}>
-                    <Radio.Button value="07:00 - 13:00" onChange={handleChange}>07:00 - 13:00</Radio.Button>
-                    <Radio.Button value="13:30 - 19:00" onChange={handleChange}>13:30 - 19:00</Radio.Button>
-                    <Radio.Button value="19:00 - 07:00" onChange={handleChange}>19:00 - 07:00</Radio.Button>
-                </Radio.Group>
-            </Modal>
+        <div className="escala-tela">
+            <Sidebar />
+            <div className="escala" style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+                <Modal title="Defina o Horário" open={isModalOpen} onOk={handleOk} >
+                    <Radio.Group value={placement} onChange={placementChange}>
+                        <Radio.Button value="07:00 - 13:00" onChange={handleChange}>07:00 - 13:00</Radio.Button>
+                        <Radio.Button value="13:30 - 19:00" onChange={handleChange}>13:30 - 19:00</Radio.Button>
+                        <Radio.Button value="19:00 - 07:00" onChange={handleChange}>19:00 - 07:00</Radio.Button>
+                    </Radio.Group>
+                </Modal>
 
-            <h1>Escolhar Seus Horários</h1>
-            {modalEspera && <ModalAguardandoRodada closeModal={closeModal} />}
-            <div>
+                <h1>Escolhar Seus Horários</h1>
+                {modalEspera && <ModalAguardandoRodada closeModal={closeModal} />}
                 <Calendar cellRender={cellrender} onSelect={showModal} />
                 <button className="gerar-token" onClick={postPlantao}>
                     Salvar

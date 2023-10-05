@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { SettingOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import axios from 'axios';
 
 import "./styles.css";
@@ -45,9 +45,10 @@ export default function ModalGerarToken() {
                 <div className="modal-token-botoes">
                     <Input onChange={handleChange}
                         value={codigoEscala} />
-                    <button className="gerar-token" onClick={postEscala}>
+                    <Button className="gerar-token tirar" onClick={postEscala} size="large"> Gerar Token de Acesso</Button>
+                    {/* <button >
                         Gerar Token de Acesso
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
