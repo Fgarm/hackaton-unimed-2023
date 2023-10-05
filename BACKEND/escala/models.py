@@ -1,5 +1,6 @@
 from django.db import models
 from uuid import uuid4
+import uuid
 from django.db import models
 from datetime import datetime
 from funcionario.models import Funcionario
