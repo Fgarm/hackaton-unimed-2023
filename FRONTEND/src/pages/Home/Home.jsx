@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Badge, Calendar } from "antd";
 import { useEffect, useState } from "react";
 import SideBar from "../../components/SideBar";
-import ModalAvisar from "../ModalAvisar/ModalAvisar";
+import ModalAvisar from "../../components/ModalAvisar/ModalAvisar";
 import "./styles.css";
+import ModalGerarToken from "../../components/ModalGerarToken/ModalGerarToken";
 
 const getListData = (value) => {
     let listData;
@@ -15,10 +16,6 @@ const getListData = (value) => {
                     type: "warning",
                     content: "This is warning event.",
                 },
-                {
-                    type: "success",
-                    content: "This is usual event.",
-                },
             ];
             break;
         case 10:
@@ -27,38 +24,10 @@ const getListData = (value) => {
                     type: "warning",
                     content: "This is warning event.",
                 },
-                {
-                    type: "success",
-                    content: "This is usual event.",
-                },
-                {
-                    type: "error",
-                    content: "This is error event.",
-                },
             ];
             break;
         case 15:
             listData = [
-                {
-                    type: "warning",
-                    content: "This is warning event",
-                },
-                {
-                    type: "success",
-                    content: "This is very long usual event......",
-                },
-                {
-                    type: "error",
-                    content: "This is error event 1.",
-                },
-                {
-                    type: "error",
-                    content: "This is error event 2.",
-                },
-                {
-                    type: "error",
-                    content: "This is error event 3.",
-                },
                 {
                     type: "error",
                     content: "This is error event 4.",
@@ -78,6 +47,7 @@ export default function Home() {
     const navigate = useNavigate();
 
     const [modal, setModal] = useState(false);
+    const [modalGerarToken, setModalGerarToken] = useState(false);
     const [mes, setMes] = useState("Outubro");
     const numeroMes = {
         1: "Janeiro",
@@ -130,6 +100,7 @@ export default function Home() {
 
     function closeModal() {
         setModal(false);
+        setModalGerarToken(false);
     }
 
     useEffect(() => {}, []);
@@ -140,6 +111,9 @@ export default function Home() {
             <div className="calendar">
                 <h1>Agenda do Mês de {mes}</h1>
                 {modal && <ModalAvisar fecharModal={closeModal} />}
+                {modalGerarToken && (
+                    <ModalGerarToken fecharModal={closeModal} />
+                )}
 
                 {!modal && (
                     <Calendar
