@@ -16,7 +16,6 @@ class FuncionarioView(ModelViewSet):
     def update(self, request, *args, **kwargs):
         funcionario = self.get_object()
         data = request.data
-        data['escala'] = kwargs.get('codigo')
         serializer = FuncionarioSerializer(funcionario, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
