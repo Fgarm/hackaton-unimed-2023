@@ -7,8 +7,9 @@ from .views import EscalaApiView
 
 urlpatterns = [
     
-    path('criar-escala/', EscalaApiView.cadastrar_escala, name='criar-funcionario'),
-    
+    path('criar-escala/', EscalaApiView.cadastrar_escala, name='criar-escala'),
+    path('cadastrar-medicos/', EscalaApiView.cadastrar_medicos, name='cadastrar funcionarios'),
+    path('pegar-medicos-escala/', EscalaApiView.get_medicos_escala, name='pegar-medicos-escala'),
     # path('escala', EscalaView.as_view({
     #     'post': 'create',
     #     'get': 'list',

@@ -9,6 +9,7 @@ from .models import Escala
 from .models import FUNCIONARIOS_ESCALA
 from .serializers import EscalaSerializer
 from funcionario.models import Funcionario
+from funcionario.serializers import FuncionarioSerializer
 
 
 from rest_framework.views import APIView
@@ -37,6 +38,12 @@ class EscalaApiView(APIView):
     def get_medicos_escala(request):
         escala = Escala.objects.get(codigo=request.data["codigo"])
         functs = FUNCIONARIOS_ESCALA.objects.filter(escala=escala)
+        funcionarios = ''
+        for funcionario in functs:
+            funcionarios += str(FuncionarioSerializer(funcionario.funcionarios))
+            
+        return Response(funcionarios, status= status.HTTP_200_OK)
+        
         
     # devolve o médico da vez, com status diferente pra entre round e acabou a escolha
     
