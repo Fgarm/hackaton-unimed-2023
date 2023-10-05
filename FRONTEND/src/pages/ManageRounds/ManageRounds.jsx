@@ -16,22 +16,23 @@ import {
 import Home from "../../pages/Home/Home";
 import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
-
+import SideBar from "../../components/SideBar";
+import { useNavigate } from "react-router-dom";
 const { Header, Footer, Sider, Content } = Layout;
 
 const schedule = {
     firstMonth: {
         "2023-08-05": [
-            { hours: "7:00 - 13:00", content: "Dr. Nome" },
-            { hours: "13:00 - 19:00", content: "Dr. Nome" },
-            { hours: "19:00 - 7:00", content: "Dr. Nome" },
+            { hours: "7:00 - 13:00", content: "Dr. Roberto" },
+            { hours: "13:00 - 19:00", content: "Dr. Carlos" },
+            { hours: "19:00 - 7:00", content: "Dr. Rodrigo" },
         ],
-        "2023-08-06": [{ hours: "7:00 - 13:00", content: "Dr. Nome" }],
+        "2023-08-06": [{ hours: "7:00 - 13:00", content: "Dr. Leandro" }],
     },
     secondMonth: {
         "2023-09-05": [
-            { hours: "7:00 - 13:00", content: "Dr. Nome" },
-            { hours: "13:00 - 19:00", content: "Dr. Nome" },
+            { hours: "7:00 - 13:00", content: "Dr. Silvio" },
+            { hours: "13:00 - 19:00", content: "Dr. Carlos" },
             { hours: "19:00 - 7:00", content: "Dr. Nome" },
         ],
         "2023-09-06": [{ hours: "7:00 - 13:00", content: "Dr. Nome" }],
@@ -51,26 +52,26 @@ const scaleStyle = {
 };
 
 const navigateButtonsScaleStyle = {
-    paddingTop: "20px",
+    paddingTop: "5px",
     position: "relative",
 };
 
 const doctorsListStyle = {
-    paddingTop: "10px",
+    paddingTop: "5px",
 };
 
 const data = [
     {
-        title: "Dr. Nome",
+        title: "Dr. Roberto",
     },
     {
-        title: "Dr. Nome",
+        title: "Dr. Carlos",
     },
     {
-        title: "Dr. Nome",
+        title: "Dr. Pedro",
     },
     {
-        title: "Dr. Nome",
+        title: "Dr. Lucas",
     },
 ];
 
@@ -90,6 +91,8 @@ export default function ManageRoundsPage() {
     //         console.log(res.data);
     //     });
     // }
+
+    const navigate = useNavigate();
 
     const [mes, setMes] = useState("Janeiro");
 
@@ -271,8 +274,13 @@ export default function ManageRoundsPage() {
         return info.originNode;
     };
 
+    function closeModal(){
+        navigate("/");
+    }
+
     return (
-        <>
+        <div className="escala-tela">
+            <SideBar abrirModalGeralToken={closeModal} />
             {/* <Row>
                 <Col span={18} push={6}>
                     <div>
@@ -282,6 +290,7 @@ export default function ManageRoundsPage() {
                 </Col>
                 <Col span={6} pull={18}> */}
             <Space
+            className="space-container"
                 direction="vertical"
                 style={{
                     width: "100%",
@@ -297,9 +306,9 @@ export default function ManageRoundsPage() {
                     cellRender={cellRender}
                 />
                 <Space wrap style={navigateButtonsScaleStyle}>
-                    <Button>Mês anterior</Button>
-                    <Button>Próxima rodada</Button>
-                    <Button>Próximo mês</Button>
+                    <Button size="large">Mês anterior</Button>
+                    <Button size="large">Próxima rodada</Button>
+                    <Button size="large">Próximo mês</Button>
                 </Space>
                 <Space wrap style={doctorsListStyle}>
                     {/* <List
@@ -316,7 +325,7 @@ export default function ManageRoundsPage() {
                         header={<h3>Médicos</h3>}
                         itemLayout="horizontal"
                         dataSource={data}
-                        style={{ width: "700px" }}
+                        style={{ width: "900px", fontSize: "large" }}
                         renderItem={(item, index) => (
                             <List.Item>
                                 <List.Item.Meta
@@ -326,11 +335,11 @@ export default function ManageRoundsPage() {
                                         />
                                     }
                                     title={
-                                        <a href="https://ant.design">
+                                        <a href="https://ant.design" style={{ fontSize: "medium" }}>
                                             {item.title}
                                         </a>
                                     }
-                                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                    description="Aguardando..."
                                 />
                             </List.Item>
                         )}
@@ -340,6 +349,6 @@ export default function ManageRoundsPage() {
             </Space>
             {/* </Col>
             </Row> */}
-        </>
+        </div>
     );
 }

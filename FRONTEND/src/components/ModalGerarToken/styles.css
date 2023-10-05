@@ -46,3 +46,7 @@
     background-color: #03A6A6;
     font-size: 22px;
 }
+
+.tirar:hover {
+    color: white !important;
+}

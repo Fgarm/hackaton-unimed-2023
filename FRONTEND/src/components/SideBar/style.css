@@ -17,11 +17,16 @@
     height: 50px;
     padding: 20px;
     cursor: pointer;
-    transition:4s;
+    transition: 4s;
 }
 
 .options a:hover {
     border: none;
     border-bottom: 1px solid white;
     transition: 4s;
+}
+
+.escala-tela {
+    display: flex;
+    flex-direction: row;
 }
