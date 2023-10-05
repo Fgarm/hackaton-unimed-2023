@@ -1,4 +1,4 @@
-.modal-avisar {
+.modal-token {
     z-index: 2;
     left: 0;
     top: 0;
@@ -16,9 +16,9 @@
     -webkit-backdrop-filter: blur(8.5px);
 }
 
-.modal-avisar-container {
-    width: 50vw;
-    height: 50vh;
+.modal-token-container {
+    width: 30vw;
+    height: 40vh;
     border-radius: 10px;
     padding: 40px;
     display: flex;
@@ -26,21 +26,23 @@
     align-items: center;
     justify-content: center;
     background-color: white;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
-.modal-botoes {
+.modal-token-botoes {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
 }
-.modal-botoes button {
+.gerar-token{
     border: none;
-    width: 150px;
+    width: 300px;
     cursor: pointer;
     border-radius: 3px;
     color: white;
     height: 50px;
+    text-align: center;
     background-color: #4a5cff;
     font-size: 22px;
 }

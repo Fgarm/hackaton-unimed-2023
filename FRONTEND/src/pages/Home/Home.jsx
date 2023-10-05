@@ -100,22 +100,28 @@ export default function Home() {
 
     function closeModal() {
         setModal(false);
+    }
+    function closeModalToken() {
         setModalGerarToken(false);
+        navigate('/escala')
     }
 
     useEffect(() => {}, []);
 
+    function abrirModalGeralToken() {
+        setModalGerarToken(true)
+    }
     return (
         <div className="home">
-            <SideBar />
+            <SideBar abrirModalGeralToken={abrirModalGeralToken} />
             <div className="calendar">
                 <h1>Agenda do Mês de {mes}</h1>
                 {modal && <ModalAvisar fecharModal={closeModal} />}
                 {modalGerarToken && (
-                    <ModalGerarToken fecharModal={closeModal} />
+                    <ModalGerarToken fecharModal={closeModalToken} />
                 )}
 
-                {!modal && (
+                {!modalGerarToken && !modal && (
                     <Calendar
                         onPanelChange={onPanelChange}
                         onSelect={onSelect}
