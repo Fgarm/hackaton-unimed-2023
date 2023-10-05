@@ -20,8 +20,8 @@ class EscalaApiView(APIView):
     def cadastrar_escala(request):
         dados = request.data
         Escala.objects.create(nome = dados["nome"],
-                                data_comeco = dados["data_comeco"],
-                                data_final= dados["data_final"]
+                                data_comeco =  datetime.now().date(),
+                                data_final= datetime.now().date() + timedelta(days=90)
                                 )
         return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
     
