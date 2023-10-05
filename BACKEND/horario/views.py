@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
+import json
 # from datetime import datetime
 # from django.utils.timezone import datetime
 
@@ -14,12 +15,18 @@ class HorarioApiView(APIView):
 
     @api_view(['POST'])
     def cadastrar_horario(request):
-        Horario.objects.create(inicio = request.data["inicio"],
-                                    final= request.data["final"],
-                                    valido= request.data["valido"],
-                                    funcionario= request.data["funcionario"],
-                                    escala= request.data["escala"]
-                                    )
+        dados = {}
+        dados = json.loads(list(request.data.keys())[0])
+        #print("nos gastos:", json.loads(list(request.data.keys())[0]))
+        dados["inicial"] = str(dados["incial"]).split()[0]
+        dados["final"] = str(dados["final"]).split()[0]
+            
+        Horario.objects.create(inicio = dados["inicio"],
+                                final= dados["final"],
+                                valido= dados["valido"],
+                                funcionario= dados["funcionario"],
+                                escala= dados["escala"]
+                                )
         return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
     
     
@@ -31,7 +38,4 @@ class HorarioApiView(APIView):
     def get_horarios_escala(request):
         return Response(HorarioSerializer(Horario.objects.filter(funcionario=request.data["escala"]), context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
     
-    
-    
         
-            
