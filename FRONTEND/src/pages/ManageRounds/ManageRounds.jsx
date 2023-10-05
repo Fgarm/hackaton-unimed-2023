@@ -3,6 +3,7 @@ import './styles.css';
 import { Calendar, Layout, Space, Button, Divider, List, Typography, Avatar, Col, Row } from 'antd';
 import Home from "../../pages/Home/Home";
 import { UserOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -49,6 +50,18 @@ export default function ManageRoundsPage() {
     const onPanelChange = (value, mode) => {
         console.log(value.format('YYYY-MM-DD'), mode);
     };
+
+    const createSchedule = () => {
+        axios.post("http://localhost:6667/doctors/").then((res) => {
+            console.log(res.data);
+        });
+    }
+
+    const getDoctors = () => {
+        axios.post("http://localhost:6667/doctors/").then((res) => {
+            console.log(res.data);
+        });
+    }
 
     return (
         <>
