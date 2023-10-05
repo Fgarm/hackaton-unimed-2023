@@ -9,7 +9,7 @@ class Escala(models.Model):
     nome = models.CharField(max_length=255)
     data_comeco = models.DateField()
     data_final = models.DateField()
-    substituido = models.BooleanField(default=False) 
+
 
 class Meta:
         verbose_name = "Escala"
