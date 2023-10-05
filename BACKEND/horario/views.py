@@ -28,13 +28,26 @@ class HorarioApiView(APIView):
                                 )
         return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
     
+    @api_view(['DELETE'])
+    def destruir_horario(request):
+        dados = request.data
+        funct = Funcionario.objects.get(id=dados["funcionario"])
+        escal = Escala.objects.get(codigo=dados["escala"])
+        hor = Horario.objects.get(data = dados["data"],
+                                inicio = dados["inicio"],
+                                final= dados["final"],
+                                funcionario=funct,
+                                escala= escal
+                                )
+        hor.valido = False
+        hor.save()
     
     @api_view(['POST'])
     def get_horarios_funcionario(request):
-        return Response(HorarioSerializer(Horario.objects.filter(funcionario=request.data["funcionario"]), context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
+        return Response(HorarioSerializer(Horario.objects.filter(funcionario=request.data["funcionario"], valido=True), context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
     
     @api_view(['POST'])
     def get_horarios_escala(request):
-        return Response(HorarioSerializer(Horario.objects.filter(escala=request.data["escala"]), context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
+        return Response(HorarioSerializer(Horario.objects.filter(escala=request.data["escala"], valido=True), context={'request': request}, many=True).data, status=status.HTTP_202_ACCEPTED)
     
         

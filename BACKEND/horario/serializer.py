@@ -7,6 +7,7 @@ class HorarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Horario
         fields = (
+            'data',
             'inicio',
             'final',
             'valido', 

@@ -5,8 +5,9 @@ from rest_framework import status, viewsets
 from django.utils.timezone import localtime
 from datetime import datetime
 from .models import Escala
+from .models import FUNCIONARIOS_ESCALA
 from .serializers import EscalaSerializer
-
+from funcionario.models import Funcionario
 
 from .models import Escala
 from rest_framework.response import Response
@@ -24,6 +25,21 @@ class EscalaApiView(APIView):
                                 data_final= dados["data_final"]
                                 )
         return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
+    
+    @api_view(['UPDATE', 'PUT'])
+    def cadastrar_medicos(request):
+        dados = request.data
+        escala = Escala.objects.get(codigo=dados["codigo"])
+        for funcionario in dados['funcionarios']:
+            funct = Funcionario.objects.get(id=dados["funcionario"])
+            FUNCIONARIOS_ESCALA.objects.create(funcionario=funct, escala=escala)
+        return (Response("SUCESSO", status=status.HTTP_200_OK))
+    
+    @api_view(['POST'])
+    def get_medicos_escala(request):
+        escala = Escala.objects.get(codigo=request.data["codigo"])
+        functs = FUNCIONARIOS_ESCALA.objects.filter(escala=escala)
+
 
 
 # Create your views here.
