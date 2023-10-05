@@ -23,7 +23,6 @@ class HorarioApiView(APIView):
             
         Horario.objects.create(inicio = dados["inicio"],
                                 final= dados["final"],
-                                valido= dados["valido"],
                                 funcionario= dados["funcionario"],
                                 escala= dados["escala"]
                                 )
