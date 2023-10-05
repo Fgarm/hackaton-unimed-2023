@@ -74,6 +74,21 @@ const getMonthData = (value) => {
     }
 };
 
+const numeroMes = {
+    1: "Janeiro",
+    2: "Fevereiro",
+    3: "Março",
+    4: "Abril",
+    5: "Maio",
+    6: "Junho",
+    7: "Julho",
+    8: "Agosto",
+    9: "Setembro",
+    10: "Outubro",
+    11: "Novembro",
+    12: "Dezembro",
+};
+
 export default function ManageRoundsPage() {
     // const onPanelChange = (value, mode) => {
     //     console.log(value.format('YYYY-MM-DD'), mode);
@@ -123,11 +138,26 @@ export default function ManageRoundsPage() {
         return listData || [];
     };
 
-    function getPlantaos() {
-        // await Promise.all(
-        //     axios.get().then((res) => {
-        //console.log(res.data);
-        var listPlantaos = [{ "data": "2023-04-29", "inicio": 780, "final": 1900, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-29", "inicio": 780, "final": 1900, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-30", "inicio": 780, "final": 1900, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-31", "inicio": 780, "final": 1900, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }];
+    async function getPlantaos() {
+        const plantaos = {
+            //escala: params.get("id"),
+            escala: "123"
+        };
+
+        const response = await fetch("http://localhost:8000/horario/obter-horarios-escala/", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(plantaos), // body data type must match "Content-Type" header
+        });
+
+        //var listPlantaos = [{ "data": "2023-04-29", "inicio": 780, "final": 1900, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-29", "inicio": 780, "final": 1900, "valido": true, "funcionario": 1, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-30", "inicio": 780, "final": 1900, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }, { "data": "2023-04-31", "inicio": 780, "final": 1900, "valido": true, "funcionario": 2, "escala": "51d22dad-4717-4edd-8ebe-2818b68cb541" }];
+
+        var listPlantaos = response;
+
+        console.log(response);
 
         const transformedPlantaos = {  // tendeu
         }
@@ -174,7 +204,7 @@ export default function ManageRoundsPage() {
     const [mes, setMes] = useState("Outubro");
 
     const onPanelChange = (value) => {
-        console.log(numeroMes[value.$M] + 1);
+        //console.log(numeroMes[value.$M] + 1);
         setMes(numeroMes[value.$M + 1]);
     };
 
