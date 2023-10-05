@@ -16,7 +16,7 @@
     -webkit-backdrop-filter: blur(8.5px);
 }
 
-.modal-escolher -container {
+.modal-escolher-container {
     width: 30vw;
     height: 40vh;
     border-radius: 10px;
@@ -34,7 +34,7 @@
     flex-direction: column;
     gap: 20px;
 }
-.modal-avisar-container button {
+.modal-escolher-container button {
     border: none;
     width: 150px;
     cursor: pointer;
