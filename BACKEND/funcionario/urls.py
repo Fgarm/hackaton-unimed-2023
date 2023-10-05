@@ -6,6 +6,6 @@ from .views import FuncionarioView
 urlpatterns = [
     path('funcionario/<str:codigo', FuncionarioView.as_view({
         'put': 'update',
-    }), name='escala'),
+    }), name='funcionario'),
 
 ]
