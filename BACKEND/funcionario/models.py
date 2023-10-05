@@ -6,6 +6,7 @@ class Funcionario(models.Model):
     nome = models.CharField(max_length=255)
     pontuacao = models.IntegerField()
     funcao = models.CharField(max_length=255)
+    qtde_dias_turnos = models.IntegerField()
 
 class Meta:
         verbose_name = "Funcionario"

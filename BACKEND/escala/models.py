@@ -20,6 +20,7 @@ class Escala(models.Model):
 class FUNCIONARIOS_ESCALA(models.Model):
     funcionarios = models.ForeignKey(Funcionario, on_delete=models.RESTRICT, null=True)
     escala = models.ForeignKey (Escala, on_delete=models.CASCADE, null=True)
+    # qtde_dias_turnos = models.IntegerField()
     class Meta:
             verbose_name = "FUNCIONARIOS_ESCALA"
             verbose_name_plural = "FUNCIONARIOS_ESCALAs"
