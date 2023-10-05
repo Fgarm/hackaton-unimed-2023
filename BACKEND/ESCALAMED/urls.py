@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
         # Rotas Tags
     path('horario/', include('horario.urls')),
+    path('funcionario/', include('funcionario.urls')),
 ]

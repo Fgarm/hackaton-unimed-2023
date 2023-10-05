@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from django.utils.timezone import localtime
-
+from datetime import datetime
 from .models import Escala
 from .serializers import EscalaSerializer
 
@@ -19,8 +19,6 @@ class EscalaView(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data
-        data['data_comeco'] = localtime().date()
-        data['data_final'] = localtime().date() # colocar para 3 meses depois
         serializer = EscalaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
