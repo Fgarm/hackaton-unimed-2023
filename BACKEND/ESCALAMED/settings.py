@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u%#hw%5y%khv5f8%f=*yzlt1%16tr8v_xoqnoe84xu$^hpj3xv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'escala',
     'funcionario',
-    'horario'
+    'horario',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'ESCALAMED.urls'
@@ -82,9 +84,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     'http://localhost:5173',
 # ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5173',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:5173',
+# ]
 
 
 DATABASES = {

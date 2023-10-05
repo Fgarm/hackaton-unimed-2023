@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status, viewsets
@@ -20,7 +20,10 @@ class EscalaApiView(APIView):
     @api_view(['POST'])
     def cadastrar_escala(request):
         dados = request.data
-        Escala.objects.create(nome = dados["nome"],
+        print("aqui")
+        print(dados)
+        Escala.objects.create( codigo = dados["codigo"],
+                                nome = dados["nome"],
                                 data_comeco = dados["data_comeco"],
                                 data_final= dados["data_final"]
                                 )
@@ -55,6 +58,12 @@ class EscalaView(ModelViewSet):
     serializer_class = EscalaSerializer
     queryset = Escala.objects.all()
 
+    # def retrieve(self, request, pk=None):
+    #     queryset = Escala.objects.all()
+    #     user = get_object_or_404(queryset, pk=pk)
+    #     serializer = EscalaSerializer(user)
+    #     return Response(serializer.data)
+
     def list(self, request, *args, **kwargs):
         queryset = Escala.objects.filter(nome="teste")
         serializer = self.get_serializer(queryset, many=True)
@@ -62,6 +71,7 @@ class EscalaView(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data
+        print(data)
         serializer = EscalaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
