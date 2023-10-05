@@ -7,6 +7,25 @@ from datetime import datetime
 from .models import Escala
 from .serializers import EscalaSerializer
 
+
+from .models import Escala
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+
+
+class EscalaApiView(APIView):
+    @api_view(['POST'])
+    def cadastrar_escala(request):
+        dados = request.data
+        Escala.objects.create(nome = dados["nome"],
+                                data_comeco = dados["data_comeco"],
+                                data_final= dados["data_final"]
+                                )
+        return Response("HORARIO CADASTRADO", status=status.HTTP_201_CREATED)
+
+
 # Create your views here.
 class EscalaView(ModelViewSet):
     serializer_class = EscalaSerializer
