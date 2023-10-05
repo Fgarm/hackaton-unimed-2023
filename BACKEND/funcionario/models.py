@@ -5,7 +5,7 @@ from django.db import models
 class Funcionario(models.Model):
     nome = models.CharField(max_length=255)
     pontuacao = models.IntegerField()
-    Funcao = models.CharField(max_length=255)
+    funcao = models.CharField(max_length=255)
 
 class Meta:
         verbose_name = "Funcionario"
