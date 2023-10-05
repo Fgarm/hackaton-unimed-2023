@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import "./styles.css";
-import { Badge, Calendar } from "antd";
+import { Badge, Button, Calendar } from "antd";
 import ModalEscolherHorario from "../../components/ModalEscolherHorario/ModalEscolherHorario";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 
 const getMonthData = (value) => {
     if (value.month() === 8) {
@@ -15,6 +15,11 @@ export default function Escala() {
     const [modal, setModal] = useState(false);
     const [diaSelecionado, setDiaSelecionado] = useState([]);
     const navigate = useNavigate();
+
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
+
+    //console.log(params.get("id"));
 
     function getHorarios(dia) {
         var aux = diaSelecionado.includes(dia);
@@ -81,6 +86,27 @@ export default function Escala() {
         }
     }
 
+    async function postPlantao() {
+
+        const plantao = {
+            codigo: codigoEscala,
+            nome: "Escala 1",
+            data_comeco: "2023-04-14",
+            data_final: "2023-06-14"
+        };
+
+        const response = await fetch("http://localhost:8000/escala/criar-escala/", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(plantao), // body data type must match "Content-Type" header
+        });
+
+        //navigate(`/escala/?id=${codigoEscala}`);
+    }
+
     return (
         <div className="escala">
             {modal && <ModalEscolherHorario fecharModal={fecharModal} />}
@@ -88,6 +114,11 @@ export default function Escala() {
             <div>
                 {!modal && (
                     <Calendar cellRender={cellrender} onSelect={onSelect} />
+                )}
+                {!modal && (
+                    <button className="gerar-token" onClick={postPlantao}>
+                        Salvar
+                    </button>
                 )}
             </div>
         </div>
